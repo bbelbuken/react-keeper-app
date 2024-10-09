@@ -1,22 +1,47 @@
 import React from "react";
+import { useState } from "react";
 
-function CreateArea({ title, setTitle, content, setContent, handleSubmit}) {
+function CreateArea({ addItem }) {
+  const [note, setNote] = useState({
+    title: "",
+    content: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setNote((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addItem(note);
+    setNote("");
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input 
-            name="title" 
-            placeholder="Title" 
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            
+        <input
+          autoFocus
+          required
+          name="title"
+          placeholder="Title"
+          value={note.title}
+          onChange={handleChange}
         />
-        <textarea 
-            name="content" 
-            placeholder="Take a note..." 
-            rows="3" 
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+        <textarea
+          required
+          name="content"
+          placeholder="Take a note..."
+          rows="3"
+          value={note.content}
+          onChange={handleChange}
         />
         <button>Add</button>
       </form>
