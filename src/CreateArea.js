@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
+
 
 function CreateArea({ addItem }) {
   const [note, setNote] = useState({
@@ -26,7 +29,7 @@ function CreateArea({ addItem }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="create-note" >
         <input
           autoFocus
           required
@@ -43,7 +46,9 @@ function CreateArea({ addItem }) {
           value={note.content}
           onChange={handleChange}
         />
-        <button>Add</button>
+        <Fab onClick={handleSubmit}>
+          <AddIcon/>
+        </Fab>
       </form>
     </div>
   );
