@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import AddIcon from '@mui/icons-material/Add';
-import Fab from '@mui/material/Fab';
-
+import AddIcon from "@mui/icons-material/Add";
+import Fab from "@mui/material/Fab";
+import Zoom from "@mui/material/Zoom";
 
 function CreateArea({ addItem }) {
   const [note, setNote] = useState({
@@ -24,12 +24,12 @@ function CreateArea({ addItem }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem(note);
-    setNote({title: "", content: ""});
+    setNote({ title: "", content: "" });
   };
 
   return (
     <div>
-      <form className="create-note" >
+      <form className="create-note" onSubmit={handleSubmit}>
         <input
           autoFocus
           required
@@ -46,9 +46,11 @@ function CreateArea({ addItem }) {
           value={note.content}
           onChange={handleChange}
         />
-        <Fab onClick={handleSubmit}>
-          <AddIcon/>
-        </Fab>
+        <Zoom in={true}>
+          <Fab onClick={handleSubmit}>
+            <AddIcon />
+          </Fab>
+        </Zoom>
       </form>
     </div>
   );
