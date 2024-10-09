@@ -5,24 +5,45 @@ import CreateArea from "./CreateArea";
 import { useState } from "react";
 
 function App() {
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [id, setId] = useState(1);
+  const [noteList, setNoteList] = useState([]);
+
+  const addItem = (title, content) => {
+    const newNote = {
+      id: id,
+      title: title,
+      content: content,
+    };
+
+    setNoteList((prevNotes) => [...prevNotes, newNote]);
+    setId((prevId) => prevId + 1);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    addItem(title, content);
+    setTitle("");
+    setContent("");
   };
 
   return (
     <div className="App">
       <Header title="Keeper" />
-      <CreateArea 
-        title={title} 
+      <CreateArea
+        title={title}
         setTitle={setTitle}
-        content={content} 
+        content={content}
         setContent={setContent}
-        handleSubmit={handleSubmit} 
+        handleSubmit={handleSubmit}
       />
-      <Note />
+      {noteList.map((item) => (
+        <Note 
+          key={item.id}
+          item={item} />
+      ))}
+
       <Footer />
     </div>
   );
