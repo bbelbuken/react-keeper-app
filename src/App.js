@@ -23,6 +23,7 @@ function App() {
     <div className="App">
       <Header title="Keeper" />
       <CreateArea addItem={addItem} />
+      <div className="note-container">
       {noteList.map((item) => (
         <Note 
           key={item.id}
@@ -30,6 +31,7 @@ function App() {
           deleteItem={deleteItem}          
           />
       ))}
+      </div>
 
       <Footer />
     </div>
