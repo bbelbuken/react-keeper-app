@@ -9,6 +9,7 @@ function CreateArea({ addItem }) {
     title: "",
     content: "",
   });
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,27 +28,39 @@ function CreateArea({ addItem }) {
     setNote({ title: "", content: "" });
   };
 
+  const handleClick = () => {
+    setIsClicked(true);
+  };
+
   return (
     <div>
-      <form className="create-note" onSubmit={handleSubmit}>
-        <input
-          autoFocus
-          required
-          name="title"
-          placeholder="Title"
-          value={note.title}
-          onChange={handleChange}
-        />
+      <form
+        className="create-note"
+        onSubmit={handleSubmit}
+        onClick={handleClick}
+      >
+        {isClicked && (
+          <input
+            autoFocus
+            required
+            name="title"
+            placeholder="Title"
+            value={note.title}
+            onChange={handleChange}
+          />
+        )}
+
         <textarea
           required
           name="content"
           placeholder="Take a note..."
-          rows="3"
+          rows={isClicked ? 3 : 1}
           value={note.content}
           onChange={handleChange}
         />
-        <Zoom in={true}>
-          <Fab onClick={handleSubmit}>
+        {/* check material ui site... zoom transform... */}
+        <Zoom in={isClicked}> 
+          <Fab type="submit"> {/* floating action button */}
             <AddIcon />
           </Fab>
         </Zoom>
