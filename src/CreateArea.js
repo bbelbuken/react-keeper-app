@@ -21,7 +21,7 @@ function CreateArea({ addItem }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem(note);
-    setNote("");
+    setNote({title: "", content: ""});
   };
 
   return (
