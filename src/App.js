@@ -13,6 +13,11 @@ function App() {
     setNoteList(prevNote => [...prevNote, newNote])
   };
 
+  const deleteItem = (id) => {
+    const newDeletedList = noteList.filter(item => item.id !== id)
+    setNoteList(newDeletedList)
+  }
+
 
   return (
     <div className="App">
@@ -21,7 +26,9 @@ function App() {
       {noteList.map((item) => (
         <Note 
           key={item.id}
-          item={item} />
+          item={item}
+          deleteItem={deleteItem}          
+          />
       ))}
 
       <Footer />
